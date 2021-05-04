@@ -1,0 +1,25 @@
+server: 
+  port: 8081
+
+spring:
+  datasource:
+    url: jdbc:log4jdbc:mysql://localhost:3306/odod?useUnicode=true&characterEncoding=utf8&useSSL=false
+    driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+    username: root
+    password: root
+  jpa: 
+    database: mysql
+    generate-ddl: true
+    show-sql: true
+  redis:
+    port: 6379
+    host: 127.0.0.1
+    database: 0
+    lettuce:
+      pool:
+        max-active: 10
+        max-idle: 10
+        min-idle: 2
+
+logging:
+  config: classpath:logback-local.xml
