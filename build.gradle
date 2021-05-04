@@ -40,7 +40,9 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
     compile("com.querydsl:querydsl-jpa")
-    compile("com.querydsl:querydsl-apt")	
+    compile("com.querydsl:querydsl-apt")
+
+	implementation group: 'net.logstash.logback', name: 'logstash-logback-encoder', version: '4.11'
 }
 
 // querydsl 적용
