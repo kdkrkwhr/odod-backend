@@ -15,9 +15,9 @@
         </layout>
     </appender>
 
-    <root level="INFO">
+    <!-- <root level="INFO">
         <appender-ref ref="LOGSTASH"/>
-    </root>
+    </root> -->
 
     <root level="INFO">
         <appender-ref ref="ROOT_LOG_REF"/>

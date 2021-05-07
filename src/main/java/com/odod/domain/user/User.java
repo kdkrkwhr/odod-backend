@@ -13,17 +13,14 @@ import java.util.UUID;
 @Getter
 @Setter
 @Entity
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
 public class User extends BaseTimeEntity {
 
-  @GeneratedValue(generator = "UUID")
-  @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
-  @Column(columnDefinition = "BINARY(16)")
-  @Id // primary key
-  private UUID idx;
+  @Id
+  @GeneratedValue(strategy = GenerationType.SEQUENCE)
+  private Long idx;
 
   @Column
   private String userId;
@@ -38,23 +35,10 @@ public class User extends BaseTimeEntity {
   private String email;
 
   @Column
-  private Character useYn;
-
-  public User deleteUser() {
-    this.useYn = 'Y';
-
-    return this;
-  }
-
-  public User updatePassword(String password) {
-    this.password = password;
-
-    return this;
-  }
+  private String useYn;
 
   public UserResponseDto toResponseDto(User user) {
-
-    return UserResponseDto.builder().idx(user.getIdx()).userId(user.getUserId())
+    return UserResponseDto.builder().userId(user.getUserId())
         .name(user.getName()).email(user.getEmail()).build();
   }
 }

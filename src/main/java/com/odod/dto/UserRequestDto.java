@@ -30,11 +30,5 @@ public class UserRequestDto {
   @NotBlank(message = "이름을 작성해주세요.")
   @Size(max = 10, message = "이름은 10자 내외로 작성해주세요.")
   private String name;
-
-  public User toEntity() {
-    return User.builder().userId(this.getUserId())
-        .password(this.getPassword()).name(this.getName())
-        .email(this.getEmail()).useYn('N').build();
-  }
 }
 
