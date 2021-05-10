@@ -2,14 +2,12 @@ package com.odod.dto;
 
 import lombok.Builder;
 import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
 
-import java.util.UUID;
-import com.odod.dto.UserResponseDto.UserResponseDtoBuilder;
+import org.springframework.data.elasticsearch.annotations.Document;
 
-@Builder
 @Getter
+@Builder
+@Document(indexName = "position")
 public class PositionResponseDto {
 
   private String userId;

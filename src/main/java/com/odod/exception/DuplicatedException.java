@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 public class DuplicatedException extends RuntimeException {
 
   public DuplicatedException(String msg) {
-    super(msg);
+    super("DuplicatedException, ".concat(msg));
   }
 }

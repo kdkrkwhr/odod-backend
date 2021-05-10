@@ -7,7 +7,6 @@ import javax.persistence.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
-import com.odod.dto.PositionRequestDto.PositionRequestDtoBuilder;
 import com.odod.dto.PositionResponseDto;
 import lombok.Builder;
 import lombok.Getter;
