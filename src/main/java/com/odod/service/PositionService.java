@@ -1,9 +1,7 @@
 package com.odod.service;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.slf4j.Logger;
@@ -30,7 +28,7 @@ public class PositionService {
   private PositionEsRepository repository;
 
   @Autowired
-  private ElasticsearchRestTemplate elasticsearchTemplate;
+  private ElasticsearchRestTemplate esTemplate;
 
   public Map<String, Object> insertPositionData(PositionRequestDto position) {
     Map<String, Object> result = new LinkedHashMap<String, Object>();
@@ -57,6 +55,6 @@ public class PositionService {
         .withQuery(QueryBuilders.matchQuery("userId", userId))
         .build();
 
-    return elasticsearchTemplate.search(searchQuery, PositionResponseDto.class);
+    return esTemplate.search(searchQuery, PositionResponseDto.class);
   }
 }

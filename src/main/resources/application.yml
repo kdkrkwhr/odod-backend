@@ -11,6 +11,12 @@ spring:
     database: mysql
     generate-ddl: true
     show-sql: true
+  thymeleaf:
+    cache: false
+    mode: HTML
+    prefix: classpath:/
+    suffix: .html
+    view-names: thymeleaf/*
   redis:
     port: 6379
     host: 127.0.0.1

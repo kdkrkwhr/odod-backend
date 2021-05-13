@@ -20,4 +20,3 @@ public class PositionRequestDto {
   @NotBlank(message = "위도 값 을 입력하세요.")
   private Double lat;
 }
-

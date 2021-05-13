@@ -27,7 +27,7 @@ public class PositionRestController {
   private PositionService service;
 
   @ApiOperation(value = "위치 데이터 추가", tags = "위치 데이터")
-  @RequestMapping(value = "/insert", method = {RequestMethod.GET, RequestMethod.POST})
+  @RequestMapping(value = "/insert", method = RequestMethod.POST)
   public ResponseEntity<Map<String, Object>> insertPositionData(@RequestBody PositionRequestDto position) {
     return new ResponseEntity<>(service.insertPositionData(position), HttpStatus.OK);
   }
