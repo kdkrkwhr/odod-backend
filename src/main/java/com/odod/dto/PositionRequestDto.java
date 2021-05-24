@@ -19,4 +19,10 @@ public class PositionRequestDto {
 
   @NotBlank(message = "위도 값 을 입력하세요.")
   private Double lat;
+
+  @NotBlank(message = "현재 속도 값 을 입력하세요.")
+  private Double speed;
+
+  @NotBlank(message = "위치 정확도 값 을 입력하세요.")
+  private Double accuracy;
 }

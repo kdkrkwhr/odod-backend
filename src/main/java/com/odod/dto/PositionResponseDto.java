@@ -13,4 +13,6 @@ public class PositionResponseDto {
   private String userId;
   private Double lon;
   private Double lat;
+  private Double speed;
+  private Double accuracy;
 }

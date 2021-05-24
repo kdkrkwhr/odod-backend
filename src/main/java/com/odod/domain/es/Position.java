@@ -31,10 +31,17 @@ public class Position {
   @Field(type = FieldType.Double)
   private Double lat;
 
+  @Field(type = FieldType.Double)
+  private Double speed;
+
+  @Field(type = FieldType.Double)
+  private Double accuracy;
+
   @Field(type = FieldType.Date)
   private Date logDate;
 
   public PositionResponseDto toResponseDto(Position position) {
-    return PositionResponseDto.builder().userId(position.getUserId()).lon(position.getLon()).lat(position.getLat()).build();
+    return PositionResponseDto.builder().userId(position.getUserId()).lon(position.getLon())
+        .lat(position.getLat()).speed(position.getSpeed()).accuracy(position.getAccuracy()).build();
   }
 }

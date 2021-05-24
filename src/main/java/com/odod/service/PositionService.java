@@ -36,7 +36,8 @@ public class PositionService {
     try {
 
       repository.save(Position.builder().userId(position.getUserId()).lon(position.getLon())
-          .lat(position.getLat()).logDate(new Date()).build());
+          .lat(position.getLat()).logDate(new Date()).speed(position.getSpeed())
+          .accuracy(position.getAccuracy()).build());
 
       resultCode = CommonConstant.ResponseUtil.API_RESULT_CODE_SUCC;
 
@@ -50,8 +51,7 @@ public class PositionService {
 
   public SearchHits<PositionResponseDto> selectPositionData(String userId) {
     Query searchQuery = new NativeSearchQueryBuilder()
-        .withQuery(QueryBuilders.matchQuery("userId", userId))
-        .build();
+        .withQuery(QueryBuilders.matchQuery("userId", userId)).build();
 
     return esTemplate.search(searchQuery, PositionResponseDto.class);
   }
