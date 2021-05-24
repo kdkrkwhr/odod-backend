@@ -27,5 +27,8 @@ spring:
         max-idle: 10
         min-idle: 2
 
+jwt:
+  secret: jwtsecret
+
 logging:
   config: classpath:logback-local.xml
