@@ -30,8 +30,7 @@ public class PositionService {
   @Autowired
   private ElasticsearchRestTemplate esTemplate;
 
-  public Map<String, Object> insertPositionData(PositionRequestDto position) {
-    Map<String, Object> result = new LinkedHashMap<String, Object>();
+  public long insertPositionData(PositionRequestDto position) {
     long resultCode;
 
     try {
@@ -46,8 +45,7 @@ public class PositionService {
       throw new SavingsException("");
     }
 
-    result.put(CommonConstant.ResponseUtil.API_RESULT_CODE_KEY, resultCode);
-    return result;
+    return resultCode;
   }
 
   public SearchHits<PositionResponseDto> selectPositionData(String userId) {

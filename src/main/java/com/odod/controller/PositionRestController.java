@@ -1,5 +1,6 @@
 package com.odod.controller;
 
+import java.util.HashMap;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
@@ -29,13 +30,23 @@ public class PositionRestController {
   @ApiOperation(value = "위치 데이터 추가", tags = "위치 데이터")
   @RequestMapping(value = "/insert", method = RequestMethod.POST)
   public ResponseEntity<Map<String, Object>> insertPositionData(@RequestBody PositionRequestDto position) {
-    return new ResponseEntity<>(service.insertPositionData(position), HttpStatus.OK);
+    HashMap<String, Object> result = new HashMap<String, Object>();
+
+    result.put("resultCode", service.insertPositionData(position));
+
+    return new ResponseEntity<>(result, HttpStatus.OK);
   }
 
   @ApiOperation(value = "위치 데이터 조회", tags = "위치 데이터")
   @RequestMapping(value = "/select", method = RequestMethod.GET)
   public ResponseEntity<?> selectPositionData(HttpServletRequest request) {
+    HashMap<String, Object> result = new HashMap<String, Object>();
+
     String userId = request.getParameter("userId") == null ? "" : request.getParameter("userId");
-    return new ResponseEntity<>(service.selectPositionData(userId), HttpStatus.OK);
+    result.put("data", service.selectPositionData(userId));
+    result.put("userId", userId);
+    result.put("resultCode", 1L);
+
+    return new ResponseEntity<>(result, HttpStatus.OK);
   }
 }
