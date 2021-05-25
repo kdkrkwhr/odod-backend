@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import com.odod.dto.PositionRequestDto;
+import com.odod.dto.SearchPositionDto;
 import com.odod.service.PositionService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -39,12 +40,10 @@ public class PositionRestController {
 
   @ApiOperation(value = "위치 데이터 조회", tags = "위치 데이터")
   @RequestMapping(value = "/select", method = RequestMethod.GET)
-  public ResponseEntity<?> selectPositionData(HttpServletRequest request) {
+  public ResponseEntity<?> selectPositionData(@RequestBody SearchPositionDto dto) {
     HashMap<String, Object> result = new HashMap<String, Object>();
 
-    String userId = request.getParameter("userId") == null ? "" : request.getParameter("userId");
-    result.put("data", service.selectPositionData(userId));
-    result.put("userId", userId);
+    result.put("data", service.selectPositionData(dto));
     result.put("resultCode", 1L);
 
     return new ResponseEntity<>(result, HttpStatus.OK);

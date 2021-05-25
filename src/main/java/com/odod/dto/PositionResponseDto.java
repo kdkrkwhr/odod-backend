@@ -2,7 +2,7 @@ package com.odod.dto;
 
 import lombok.Builder;
 import lombok.Getter;
-
+import java.util.Date;
 import org.springframework.data.elasticsearch.annotations.Document;
 
 @Getter
@@ -15,4 +15,5 @@ public class PositionResponseDto {
   private Double lat;
   private Double speed;
   private Double accuracy;
+  private Date logDate;
 }

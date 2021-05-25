@@ -3,12 +3,19 @@ package com.odod.service;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
+import org.elasticsearch.index.query.RangeQueryBuilder;
+import org.elasticsearch.search.sort.FieldSortBuilder;
+import org.elasticsearch.search.sort.SortBuilders;
+import org.elasticsearch.search.sort.SortOrder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.elasticsearch.core.ElasticsearchRestTemplate;
 import org.springframework.data.elasticsearch.core.SearchHits;
+import org.springframework.data.elasticsearch.core.query.NativeSearchQuery;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
 import org.springframework.data.elasticsearch.core.query.Query;
 import org.springframework.stereotype.Service;
@@ -16,6 +23,7 @@ import com.odod.domain.es.Position;
 import com.odod.domain.es.PositionEsRepository;
 import com.odod.dto.PositionRequestDto;
 import com.odod.dto.PositionResponseDto;
+import com.odod.dto.SearchPositionDto;
 import com.odod.exception.SavingsException;
 import com.odod.util.CommonConstant;
 
@@ -43,15 +51,20 @@ public class PositionService {
 
     } catch (Exception e) {
       resultCode = CommonConstant.ResponseUtil.API_RESULT_CODE_FAIL;
-      throw new SavingsException("");
+      throw new SavingsException("position data insert fail");
     }
 
     return resultCode;
   }
 
-  public SearchHits<PositionResponseDto> selectPositionData(String userId) {
+  public SearchHits<PositionResponseDto> selectPositionData(SearchPositionDto dto) {
+    QueryBuilder userIdSearchQuery = QueryBuilders.matchQuery("userId", dto.getUserId());
+    RangeQueryBuilder dateSearchQuery = QueryBuilders.rangeQuery("logDate").from(dto.getFrom()).to(dto.getTo())
+        .includeLower(true).includeUpper(false);
+
     Query searchQuery = new NativeSearchQueryBuilder()
-        .withQuery(QueryBuilders.matchQuery("userId", userId)).build();
+        .withQuery(userIdSearchQuery)
+        .withQuery(dateSearchQuery).build();
 
     return esTemplate.search(searchQuery, PositionResponseDto.class);
   }
