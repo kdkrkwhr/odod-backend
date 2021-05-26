@@ -2,7 +2,6 @@ package com.odod.controller;
 
 import java.util.HashMap;
 import java.util.Map;
-import javax.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,10 +39,10 @@ public class PositionRestController {
 
   @ApiOperation(value = "위치 데이터 조회", tags = "위치 데이터")
   @RequestMapping(value = "/select", method = RequestMethod.GET)
-  public ResponseEntity<?> selectPositionData(@RequestBody SearchPositionDto dto) {
+  public ResponseEntity<Object> selectPositionData(@RequestBody SearchPositionDto search) {
     HashMap<String, Object> result = new HashMap<String, Object>();
 
-    result.put("data", service.selectPositionData(dto));
+    result.put("data", service.selectPositionData(search));
     result.put("resultCode", 1L);
 
     return new ResponseEntity<>(result, HttpStatus.OK);

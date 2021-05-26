@@ -26,7 +26,7 @@ public class UserController {
 
   @ApiOperation(value = "회원 가입", tags = "회원 정보 관리")
   @RequestMapping(value = "/insert", method = RequestMethod.POST)
-  public ResponseEntity<?> saveUser(@RequestBody UserRequest userReq) {
+  public ResponseEntity<HashMap<String, Object>> saveUser(@RequestBody UserRequest userReq) {
     HashMap<String, Object> result = new HashMap<String, Object>();
 
     userService.save(User.builder().email(userReq.getEmail()).name(userReq.getName()).build());
@@ -38,7 +38,7 @@ public class UserController {
 
   @ApiOperation(value = "회원 유효성 체크", tags = "회원 정보 관리")
   @RequestMapping(value = "/exist/{email}", method = RequestMethod.GET)
-  public ResponseEntity<?> findUserByEmail(@PathVariable String email) {
+  public ResponseEntity<HashMap<String, Object>> findUserByEmail(@PathVariable String email) {
     HashMap<String, Object> result = new HashMap<String, Object>();
 
     Optional<User> user = userService.findUserByEmail(email);
