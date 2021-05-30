@@ -13,4 +13,5 @@ public class UserRequest {
 
   String email;
   String name;
+  String picture;
 }
