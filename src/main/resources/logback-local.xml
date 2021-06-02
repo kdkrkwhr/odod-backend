@@ -11,7 +11,7 @@
     <appender name="ROOT_LOG_REF"
               class="ch.qos.logback.core.ConsoleAppender">
         <layout class="ch.qos.logback.classic.PatternLayout">
-            <pattern>[%-5level] [%d{yy-MM-dd HH:mm:ss SSS}] [%thread] [%logger{10}:%line] - %msg%n</pattern>
+            <pattern>[ %-5level] [%d{yy-MM-dd HH:mm:ss SSS}] [%thread] [%logger{10}:%line] - %msg%n</pattern>
         </layout>
     </appender>
 

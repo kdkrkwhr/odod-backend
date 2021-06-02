@@ -16,8 +16,8 @@ import lombok.ToString;
 @ToString
 public class SearchPositionDto {
 
-  @NotBlank(message = "사용자 아이디를 알려주세요.")
-  private String userId;
+  @NotBlank(message = "사용자 이메일을 알려주세요.")
+  private String email;
 
   @NotBlank(message = "검색 시작일자를 알려주세요.")
   private String from;

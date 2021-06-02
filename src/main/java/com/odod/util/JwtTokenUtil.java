@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import com.google.common.base.Function;
-import com.odod.exception.UsernameFromTokenException;
+import com.odod.exception.UserEmailFromTokenException;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -21,11 +21,14 @@ public class JwtTokenUtil implements Serializable {
   @Value("${jwt.secret}")
   private String secret;
 
-  public String getUsernameFromToken(String token) {
+  public String getUserEmailFromToken(String token) {
+
     try {
+
       return getClaimFromToken(token, Claims::getSubject);
+
     } catch (Exception ex) {
-      throw new UsernameFromTokenException("username from token exception");
+      throw new UserEmailFromTokenException("email from token exception");
     }
   }
 
@@ -60,7 +63,7 @@ public class JwtTokenUtil implements Serializable {
   }
 
   public Boolean validateToken(String token, UserDetails userDetails) {
-    final String username = getUsernameFromToken(token);
+    final String username = getUserEmailFromToken(token);
     return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
   }
 }

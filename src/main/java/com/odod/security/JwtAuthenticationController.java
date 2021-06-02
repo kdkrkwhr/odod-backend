@@ -31,7 +31,7 @@ public class JwtAuthenticationController {
     Map<String, Object> result = new HashMap<String, Object>();
 
     final UserDetails userDetails =
-        userDetailService.loadUserByUsername(authenticationRequest.getUsername());
+        userDetailService.loadUserByUsername(authenticationRequest.getEmail());
     result.put("token", jwtTokenUtil.generateToken(userDetails));
 
     return new ResponseEntity<>(result, HttpStatus.OK);

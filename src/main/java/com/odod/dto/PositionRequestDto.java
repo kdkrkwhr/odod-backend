@@ -11,7 +11,7 @@ import lombok.*;
 @ToString
 public class PositionRequestDto {
 
-  @NotBlank(message = "사용자 아이디를 알려주세요.")
+  @NotBlank(message = "사용자 식별 값 을 입력하세요.")
   private String userId;
 
   @NotBlank(message = "경도 값 을 입력하세요.")

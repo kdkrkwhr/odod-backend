@@ -41,7 +41,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
       try {
 
-        username = jwtTokenUtil.getUsernameFromToken(jwtToken);
+        username = jwtTokenUtil.getUserEmailFromToken(jwtToken);
 
       } catch (IllegalArgumentException ex) {
         logger.error("Unable to get JWT token", ex);
@@ -56,10 +56,8 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
       if (jwtTokenUtil.validateToken(jwtToken, userDetails)) {
         UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken =
-            new UsernamePasswordAuthenticationToken(userDetails, null,
-                userDetails.getAuthorities());
-        usernamePasswordAuthenticationToken
-            .setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+            new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+        usernamePasswordAuthenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 
         SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
       }

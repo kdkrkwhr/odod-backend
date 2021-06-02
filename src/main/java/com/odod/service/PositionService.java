@@ -1,21 +1,14 @@
 package com.odod.service;
 
 import java.util.Date;
-import java.util.LinkedHashMap;
-import java.util.Map;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.index.query.RangeQueryBuilder;
-import org.elasticsearch.search.sort.FieldSortBuilder;
-import org.elasticsearch.search.sort.SortBuilders;
-import org.elasticsearch.search.sort.SortOrder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.elasticsearch.core.ElasticsearchRestTemplate;
 import org.springframework.data.elasticsearch.core.SearchHits;
-import org.springframework.data.elasticsearch.core.query.NativeSearchQuery;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
 import org.springframework.data.elasticsearch.core.query.Query;
 import org.springframework.stereotype.Service;
@@ -58,13 +51,14 @@ public class PositionService {
   }
 
   public SearchHits<PositionResponseDto> selectPositionData(SearchPositionDto dto) {
-    QueryBuilder userIdSearchQuery = QueryBuilders.matchQuery("userId", dto.getUserId());
+    QueryBuilder userIdSearchQuery = QueryBuilders.matchQuery("userId", dto.getEmail());
     RangeQueryBuilder dateSearchQuery = QueryBuilders.rangeQuery("logDate").from(dto.getFrom()).to(dto.getTo())
         .includeLower(true).includeUpper(false);
 
     Query searchQuery = new NativeSearchQueryBuilder()
+        .withQuery(dateSearchQuery)
         .withQuery(userIdSearchQuery)
-        .withQuery(dateSearchQuery).build();
+        .build();
 
     return esTemplate.search(searchQuery, PositionResponseDto.class);
   }
