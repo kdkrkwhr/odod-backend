@@ -12,19 +12,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import com.odod.dto.BoardRequestDto;
-import com.odod.service.BoardService;
+import com.odod.service.GalleryService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
-@Api(value = "BoardRestController")
+@Api(value = "GalleryRestController")
 @RestController
-@RequestMapping("/api/board")
-public class BoardRestController {
+@RequestMapping("/api/gallery")
+public class GalleryRestController {
 
-  static final Logger logger = LoggerFactory.getLogger(BoardRestController.class);
+  static final Logger logger = LoggerFactory.getLogger(GalleryRestController.class);
 
   @Autowired
-  private BoardService service;
+  private GalleryService service;
 
   @ApiOperation(value = "이미지 게시판 추가", tags = "이미지 게시판 관리")
   @RequestMapping(value = "/insert", method = RequestMethod.POST)

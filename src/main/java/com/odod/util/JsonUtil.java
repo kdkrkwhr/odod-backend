@@ -10,8 +10,6 @@ import com.google.gson.Gson;
 
 public class JsonUtil {
 
-  public JsonUtil() {}
-
   @SuppressWarnings("unchecked")
   public static Map<String, Object> JsonToMap(String param) {
     Gson gson = new Gson();

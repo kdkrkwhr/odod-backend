@@ -4,6 +4,7 @@ build/
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**/build/
 !**/src/test/**/build/
+!**/src/main/resources/application.yml
 
 
 ### STS ###
@@ -17,8 +18,6 @@ build/
 bin/
 !**/src/main/**/bin/
 !**/src/test/**/bin/
-!**/src/main/**/*.properties
-!**/src/main/**/*.yml
 
 ### IntelliJ IDEA ###
 .idea

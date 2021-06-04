@@ -1,4 +1,4 @@
-package com.odod.board;
+package com.odod.gallery;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @Entity
-public class Board extends BaseTimeEntity {
+public class Gallery extends BaseTimeEntity {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,10 +25,7 @@ public class Board extends BaseTimeEntity {
   @Column(nullable = false)
   private String subject;
 
-  @Column
-  private String content;
-
-  @Column
+  @Column(nullable = false)
   private String filePath;
 
   @Column
@@ -38,10 +35,9 @@ public class Board extends BaseTimeEntity {
   private Double lat;
 
   @Builder
-  public Board(String email, String subject, String content, String filePath, Double lon, Double lat) {
+  public Gallery(String email, String subject, String content, String filePath, Double lon, Double lat) {
     this.email = email;
     this.subject = subject;
-    this.content = content;
     this.filePath = filePath;
     this.lon = lon;
     this.lat = lat;
