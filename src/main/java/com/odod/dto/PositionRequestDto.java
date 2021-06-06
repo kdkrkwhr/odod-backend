@@ -1,5 +1,7 @@
 package com.odod.dto;
 
+import java.time.LocalDateTime;
+
 import javax.validation.constraints.NotBlank;
 import lombok.*;
 
@@ -25,4 +27,7 @@ public class PositionRequestDto {
 
   @NotBlank(message = "위치 정확도 값 을 입력하세요.")
   private Double accuracy;
+
+  @NotBlank(message = "데이터 시각을 입력하세요.")
+  private LocalDateTime gpsDatetime;
 }

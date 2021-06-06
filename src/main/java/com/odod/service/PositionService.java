@@ -26,6 +26,7 @@ import com.odod.dto.PositionResponseDto;
 import com.odod.dto.SearchPositionDto;
 import com.odod.exception.SavingsException;
 import com.odod.util.CommonConstant;
+import com.querydsl.jpa.impl.JPAQueryFactory;
 
 @Service
 public class PositionService {
@@ -37,6 +38,8 @@ public class PositionService {
 
   @Autowired
   private ElasticsearchRestTemplate esTemplate;
+
+  private JPAQueryFactory factory;
 
   @Autowired
   private RestHighLevelClient client;
