@@ -1,0 +1,11 @@
+cloud:
+  aws:
+    credentials:
+      accessKey: #{accessKey}
+      secretKey: #{secretKey}
+    s3:
+      bucket: odod
+    region:
+      static: ap-northeast-2
+    stack:
+      auto: false

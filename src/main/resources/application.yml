@@ -2,11 +2,14 @@ server:
   port: 8081
 
 spring: 
+  profiles:
+    include:
+      - aws
   datasource: 
     url: jdbc:log4jdbc:mysql://localhost:3306/odod?useUnicode=true&characterEncoding=utf8&useSSL=false
     driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
     username: admin
-    password: adminadmin
+    password: admin
   jpa: 
     database: mysql
     generate-ddl: true
@@ -17,30 +20,10 @@ spring:
     prefix: classpath:/
     suffix: .html
     view-names: thymeleaf/*
-  redis: 
-    port: 6379
-    host: 127.0.0.1
-    database: 0 
-    lettuce: 
-      pool: 
-        max-active: 10
-        max-idle: 10
-        min-idle: 2
   es: 
     url: localhost:9200
     username: admin
-    password: admin
-cloud:
-  aws:
-    credentials:
-      accessKey: #{accessKey}
-      secretKey: #{secretKey}
-    s3:
-      bucket: #{bucket}
-    region:
-      static: ap-northeast-2
-    stack:
-      auto: false
+    password: adminadmin
 
 jwt: 
   secret: jwtsecret

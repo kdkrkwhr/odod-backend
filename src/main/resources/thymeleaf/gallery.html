@@ -7,13 +7,17 @@
 <body>
 	<h1>파일 업로드</h1>
 	<hr>
-	<form th:action="@{/gallery}" method="post"
-		enctype="multipart/form-data">
-		제목 : <input type="text" name="title"> 
+	<form th:action="@{/gallery}" method="post" enctype="multipart/form-data">
+		이메일 : <input type="text" name="email"> 
+		<br>
+		제목 : <input type="text" name="subject">
 		<br> 
-		파일 : <input type="file" name="file"> <br>
+		파일 : <input type="file" name="file"> 
+		<br>
+		위도 : <input type="text" name="lat"> 
+		경도 : <input type="text" name="lon"> 
+		<br>
 		<button>등록하기</button>
 	</form>
-
 </body>
 </html>
