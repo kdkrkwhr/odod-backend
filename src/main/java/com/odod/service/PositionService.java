@@ -33,13 +33,13 @@ public class PositionService {
 
   static final Logger logger = LoggerFactory.getLogger(PositionService.class);
 
+  private JPAQueryFactory factory;
+
   @Autowired
   private PositionEsRepository repository;
 
   @Autowired
   private ElasticsearchRestTemplate esTemplate;
-
-  private JPAQueryFactory factory;
 
   @Autowired
   private RestHighLevelClient client;

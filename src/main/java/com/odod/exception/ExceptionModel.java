@@ -11,7 +11,7 @@ import lombok.Setter;
 public class ExceptionModel {
 
   private long reusultCode;
-  private HttpStatus errorCode;
   private String errorMessage;
+  private HttpStatus statusCode;
 
 }
