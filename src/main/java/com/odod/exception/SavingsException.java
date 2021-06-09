@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 public class SavingsException extends RuntimeException {
 
   public SavingsException(String msg) {
-    super("SavingsException, ".concat(msg));
+    super(msg);
   }
 }

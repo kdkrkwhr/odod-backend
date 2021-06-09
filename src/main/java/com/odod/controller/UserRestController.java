@@ -18,16 +18,17 @@ import com.odod.security.JwtUserDetailsService;
 import com.odod.security.UserRequest;
 import com.odod.service.UserService;
 import com.odod.user.User;
+import com.odod.util.CommonConstant;
 import com.odod.util.JwtTokenUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
-@Api(value = "UserController")
+@Api(value = "UserRestController")
 @RestController
 @RequestMapping("/api/user")
-public class UserController {
+public class UserRestController {
 
-  static final Logger logger = LoggerFactory.getLogger(UserController.class);
+  static final Logger logger = LoggerFactory.getLogger(UserRestController.class);
 
   @Autowired
   private UserService userService;
@@ -59,7 +60,7 @@ public class UserController {
 
     result.put("token", jwtTokenUtil.generateToken(userDetails));
     result.put("message", message);
-    result.put("resultCode", 1L);
+    result.put(CommonConstant.Response.API_RESULT_CODE_KEY, CommonConstant.Response.API_RESULT_CODE_SUCC);
 
     return new ResponseEntity<>(result, HttpStatus.OK);
   }
@@ -73,7 +74,7 @@ public class UserController {
     Optional<User> user = userService.findUserByEmail(email);
 
     result.put("userCheck", user.isPresent() ? true : false);
-    result.put("resultCode", 1L);
+    result.put(CommonConstant.Response.API_RESULT_CODE_KEY, CommonConstant.Response.API_RESULT_CODE_SUCC);
 
     return new ResponseEntity<>(result, HttpStatus.OK);
   }

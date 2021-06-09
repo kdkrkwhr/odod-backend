@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.odod.dto.PositionRequestDto;
 import com.odod.dto.SearchPositionDto;
 import com.odod.service.PositionService;
+import com.odod.util.CommonConstant;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
@@ -35,7 +36,7 @@ public class PositionRestController {
   public ResponseEntity<Map<String, Object>> insertPositionData(@RequestBody PositionRequestDto position) {
     HashMap<String, Object> result = new HashMap<String, Object>();
 
-    result.put("resultCode", service.insertPositionData(position));
+    result.put(CommonConstant.Response.API_RESULT_CODE_KEY, service.insertPositionData(position));
 
     return new ResponseEntity<>(result, HttpStatus.OK);
   }
@@ -47,7 +48,7 @@ public class PositionRestController {
     HashMap<String, Object> result = new HashMap<String, Object>();
 
     result.put("data", service.selectPositionData(search));
-    result.put("resultCode", 1L);
+    result.put(CommonConstant.Response.API_RESULT_CODE_KEY, CommonConstant.Response.API_RESULT_CODE_SUCC);
 
     return new ResponseEntity<>(result, HttpStatus.OK);
   }

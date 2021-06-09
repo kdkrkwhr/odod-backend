@@ -53,10 +53,10 @@ public class PositionService {
           .lat(position.getLat()).logDate(new Date()).speed(position.getSpeed())
           .accuracy(position.getAccuracy()).build());
 
-      resultCode = CommonConstant.ResponseUtil.API_RESULT_CODE_SUCC;
+      resultCode = CommonConstant.Response.API_RESULT_CODE_SUCC;
 
     } catch (Exception e) {
-      resultCode = CommonConstant.ResponseUtil.API_RESULT_CODE_FAIL;
+      resultCode = CommonConstant.Response.API_RESULT_CODE_FAIL;
       throw new SavingsException("position data insert fail");
     }
 
