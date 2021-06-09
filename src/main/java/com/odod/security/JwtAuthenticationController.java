@@ -24,6 +24,7 @@ public class JwtAuthenticationController {
   @Autowired
   private JwtUserDetailsService userDetailService;
 
+  @CrossOrigin
   @ApiOperation(value = "토큰 정보 조회", tags = "인증 관리")
   @RequestMapping(value = "/api/token", method = RequestMethod.POST)
   public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest)

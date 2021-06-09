@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,6 +38,7 @@ public class UserController {
   @Autowired
   private JwtUserDetailsService userDetailService;
 
+  @CrossOrigin
   @ApiOperation(value = "회원 가입 or 로그인", tags = "회원 정보 관리")
   @RequestMapping(value = "/auth", method = RequestMethod.POST)
   public ResponseEntity<HashMap<String, Object>> saveUser(@RequestBody UserRequest userReq) {
@@ -62,6 +64,7 @@ public class UserController {
     return new ResponseEntity<>(result, HttpStatus.OK);
   }
 
+  @CrossOrigin
   @ApiOperation(value = "회원 유효성 체크", tags = "회원 정보 관리")
   @RequestMapping(value = "/exist/{email}", method = RequestMethod.GET)
   public ResponseEntity<HashMap<String, Object>> findUserByEmail(@PathVariable String email) {
