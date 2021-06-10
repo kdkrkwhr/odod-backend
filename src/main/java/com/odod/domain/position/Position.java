@@ -1,4 +1,4 @@
-package com.odod.domain.es;
+package com.odod.domain.position;
 
 import java.util.Date;
 import javax.persistence.GeneratedValue;

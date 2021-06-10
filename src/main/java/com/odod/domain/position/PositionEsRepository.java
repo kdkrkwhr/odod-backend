@@ -1,4 +1,4 @@
-package com.odod.domain.es;
+package com.odod.domain.position;
 
 import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
 import org.springframework.stereotype.Repository;
