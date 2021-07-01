@@ -47,7 +47,11 @@ public class PositionRestController {
   public ResponseEntity<Object> selectPositionData(@RequestBody SearchPositionDto search) throws IOException {
     HashMap<String, Object> result = new HashMap<String, Object>();
 
-    result.put("data", service.selectPositionData(search));
+    if (("date").equals(search.getType())) 
+      result.put("data", service.selectPositionDataFromTo(search));
+    else 
+      result.put("data", service.selectPositionData(search));
+      
     result.put(CommonConstant.Response.API_RESULT_CODE_KEY, CommonConstant.Response.API_RESULT_CODE_SUCC);
 
     return new ResponseEntity<>(result, HttpStatus.OK);

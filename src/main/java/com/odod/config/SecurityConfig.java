@@ -12,10 +12,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import com.odod.security.JwtUserDetailsService;
 import com.odod.security.JwtAuthenticationEntryPoint;
 import com.odod.security.JwtRequestFilter;
-import com.odod.user.Role;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
@@ -51,7 +49,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
   protected void configure(HttpSecurity http) throws Exception {
     http.cors().disable().csrf().disable().authorizeRequests()
         .antMatchers("/api/user/auth", "/api/token", "/swagger**", "/swagger-resources/**/**", "/gallery",
-            "/webjars/**", "/v2/api-docs")
+            "/webjars/**", "/v2/api-docs", "/socketPage", "/chat**", "/ws/**/**/**", "ws/**")
         .permitAll().anyRequest().authenticated().and().exceptionHandling()
         .authenticationEntryPoint(jwtAuthenticationEntryPoint).and().sessionManagement()
         .sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().formLogin().disable()

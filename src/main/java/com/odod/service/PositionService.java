@@ -1,7 +1,9 @@
 package com.odod.service;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import org.elasticsearch.action.search.MultiSearchRequest;
 import org.elasticsearch.action.search.MultiSearchResponse;
 import org.elasticsearch.action.search.SearchRequest;
@@ -26,14 +28,11 @@ import com.odod.dto.PositionResponseDto;
 import com.odod.dto.SearchPositionDto;
 import com.odod.exception.SavingsException;
 import com.odod.util.CommonConstant;
-import com.querydsl.jpa.impl.JPAQueryFactory;
 
 @Service
 public class PositionService {
 
   static final Logger logger = LoggerFactory.getLogger(PositionService.class);
-
-  private JPAQueryFactory factory;
 
   @Autowired
   private PositionEsRepository repository;
@@ -63,12 +62,27 @@ public class PositionService {
     return resultCode;
   }
 
-  public SearchHits<PositionResponseDto> selectPositionData(SearchPositionDto dto) throws IOException {
+  public SearchHits<PositionResponseDto> selectPositionDataFromTo(SearchPositionDto dto) throws IOException {
+    RangeQueryBuilder dateSearchQuery = QueryBuilders.rangeQuery("logDate").from(dto.getFrom())
+        .to(dto.getTo()).includeLower(true).includeUpper(false);
+
+    Query searchQuery = new NativeSearchQueryBuilder().withQuery(dateSearchQuery).build();
+    
+    return esTemplate.search(searchQuery, PositionResponseDto.class);
+  }
+
+  public List<SearchHits<PositionResponseDto>> selectPositionData(SearchPositionDto dto) throws IOException {
+    List<Query> queryList = new ArrayList<>();
+
     QueryBuilder userIdSearchQuery = QueryBuilders.matchQuery("userId", dto.getEmail());
     RangeQueryBuilder dateSearchQuery = QueryBuilders.rangeQuery("logDate").from(dto.getFrom())
         .to(dto.getTo()).includeLower(true).includeUpper(false);
 
-    Query searchQuery = new NativeSearchQueryBuilder().withQuery(dateSearchQuery).withQuery(userIdSearchQuery).build();
+    Query searchQueryUserId = new NativeSearchQueryBuilder().withQuery(userIdSearchQuery).build();
+    Query searchQueryDate = new NativeSearchQueryBuilder().withQuery(dateSearchQuery).build();
+
+    queryList.add(searchQueryUserId);
+    queryList.add(searchQueryDate);
 
     MultiSearchRequest request = new MultiSearchRequest();
     SearchRequest firstSearchRequest = new SearchRequest();
@@ -76,14 +90,13 @@ public class PositionService {
     searchSourceBuilder.query(QueryBuilders.matchQuery("userId", dto.getEmail()));
     firstSearchRequest.source(searchSourceBuilder);
     request.add(firstSearchRequest);
+
     SearchRequest secondSearchRequest = new SearchRequest();
     searchSourceBuilder = new SearchSourceBuilder();
     searchSourceBuilder.query(QueryBuilders.rangeQuery("logDate").from(dto.getFrom()).to(dto.getTo()).includeLower(true).includeUpper(false));
     secondSearchRequest.source(searchSourceBuilder);
     request.add(secondSearchRequest);
 
-    MultiSearchResponse response = client.msearch(request, RequestOptions.DEFAULT);
-
-    return esTemplate.search(searchQuery, PositionResponseDto.class);
+    return esTemplate.multiSearch(queryList, PositionResponseDto.class);
   }
 }

@@ -16,6 +16,9 @@ import lombok.ToString;
 @ToString
 public class SearchPositionDto {
 
+  @NotBlank(message = "API 타입을 알려주세요.")
+  private String type;
+
   @NotBlank(message = "사용자 이메일을 알려주세요.")
   private String email;
 
