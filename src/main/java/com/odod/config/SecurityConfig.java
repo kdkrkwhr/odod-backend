@@ -49,7 +49,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
   protected void configure(HttpSecurity http) throws Exception {
     http.cors().disable().csrf().disable().authorizeRequests()
         .antMatchers("/api/user/auth", "/api/token", "/swagger**", "/swagger-resources/**/**", "/gallery",
-            "/webjars/**", "/v2/api-docs", "/socketPage", "/chat**", "/ws/**/**/**", "ws/**")
+            "/webjars/**", "/v2/api-docs", "/socketPage", "/chat**", "/ws/**/**/**", "ws/**", "/css/**", "/js/**", "/favicon.ico")
         .permitAll().anyRequest().authenticated().and().exceptionHandling()
         .authenticationEntryPoint(jwtAuthenticationEntryPoint).and().sessionManagement()
         .sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().formLogin().disable()
