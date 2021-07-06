@@ -13,7 +13,6 @@ public class ChatController {
 
   @RequestMapping(value = "/socketPage", method = RequestMethod.GET)
   public String test() {
-
     return "thymeleaf/webSocket";
   }
 
